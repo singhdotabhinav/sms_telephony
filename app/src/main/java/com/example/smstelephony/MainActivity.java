@@ -13,23 +13,25 @@ public class MainActivity extends AppCompatActivity {
 
     Button phone;
     Button sms;
-    EditText phoneno;
-    String phone_no;
+    Button web;
+    EditText editText;
+    String data;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        phone = findViewById(R.id.button);
-        sms = findViewById(R.id.button2);
-        phoneno = findViewById(R.id.editText3);
+        phone = findViewById(R.id.dialer);
+        sms = findViewById(R.id.messaging);
+        web = findViewById(R.id.browse);
+        editText = findViewById(R.id.editText3);
 
         phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                phone_no = phoneno.getText().toString();
-                Intent i = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone_no, null));
+                data = editText.getText().toString();
+                Intent i = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", data, null));
                 startActivity(i);
             }
         });
@@ -37,8 +39,17 @@ public class MainActivity extends AppCompatActivity {
         sms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                phone_no = phoneno.getText().toString();
-                Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("smsto", phone_no, null));
+                data = editText.getText().toString();
+                Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("smsto", data, null));
+                startActivity(i);
+            }
+        });
+
+        web.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                data = editText.getText().toString();
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.fromParts("http", data, null));
                 startActivity(i);
             }
         });
