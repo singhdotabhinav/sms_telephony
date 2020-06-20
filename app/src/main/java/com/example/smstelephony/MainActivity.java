@@ -7,14 +7,12 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 
 public class MainActivity extends AppCompatActivity {
 
     Button phone;
     Button sms;
-    EditText phoneno;
-    String phone_no;
+    Button web;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,22 +21,31 @@ public class MainActivity extends AppCompatActivity {
 
         phone = findViewById(R.id.button);
         sms = findViewById(R.id.button2);
-        phoneno = findViewById(R.id.editText3);
+        web = findViewById(R.id.button3);
 
+        // to use phone dialer
         phone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                phone_no = phoneno.getText().toString();
-                Intent i = new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phone_no, null));
+                Intent i = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:9876543210"));
                 startActivity(i);
             }
         });
 
+        // To you use messaging app
         sms.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                phone_no = phoneno.getText().toString();
-                Intent i = new Intent(Intent.ACTION_SENDTO, Uri.fromParts("smsto", phone_no, null));
+                Intent i = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:9876543210"));
+                startActivity(i);
+            }
+        });
+
+        // To access web
+        web.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.google.com"));
                 startActivity(i);
             }
         });
